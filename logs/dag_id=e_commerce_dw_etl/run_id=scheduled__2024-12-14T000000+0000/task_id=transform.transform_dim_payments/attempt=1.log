@@ -1,0 +1,44 @@
+[2026-03-26T03:40:37.891+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T03:40:38.112+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_payments scheduled__2024-12-14T00:00:00+00:00 [queued]>
+[2026-03-26T03:40:38.215+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_payments scheduled__2024-12-14T00:00:00+00:00 [queued]>
+[2026-03-26T03:40:38.223+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T03:40:38.426+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform.transform_dim_payments> on 2024-12-14 00:00:00+00:00
+[2026-03-26T03:40:38.445+0000] {standard_task_runner.py:63} INFO - Started process 1209 to run task
+[2026-03-26T03:40:38.462+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'transform.transform_dim_payments', 'scheduled__2024-12-14T00:00:00+00:00', '--job-id', '297', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmplehr0pu1']
+[2026-03-26T03:40:38.480+0000] {standard_task_runner.py:91} INFO - Job 297: Subtask transform.transform_dim_payments
+[2026-03-26T03:40:38.897+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.transform.transform_dim_payments scheduled__2024-12-14T00:00:00+00:00 [running]> on host 031edd3e030e
+[2026-03-26T03:40:39.514+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='transform.transform_dim_payments' AIRFLOW_CTX_EXECUTION_DATE='2024-12-14T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-12-14T00:00:00+00:00'
+[2026-03-26T03:40:39.533+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-26T03:40:40.176+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-26T03:40:40.195+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T03:40:40.279+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T03:40:40.352+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T03:40:40.548+0000] {logging_mixin.py:188} INFO - Đã transform và lưu dữ liệu vào dim_payments
+[2026-03-26T03:40:40.568+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-03-26T03:40:40.581+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-26T03:40:40.632+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=e_commerce_dw_etl, task_id=transform.transform_dim_payments, run_id=scheduled__2024-12-14T00:00:00+00:00, execution_date=20241214T000000, start_date=20260326T034038, end_date=20260326T034040
+[2026-03-26T03:40:40.748+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-03-26T03:40:40.935+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-26T03:40:40.969+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-03-26T04:05:53.605+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T04:05:53.781+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_payments scheduled__2024-12-14T00:00:00+00:00 [queued]>
+[2026-03-26T04:05:53.829+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_payments scheduled__2024-12-14T00:00:00+00:00 [queued]>
+[2026-03-26T04:05:53.830+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T04:05:53.923+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform.transform_dim_payments> on 2024-12-14 00:00:00+00:00
+[2026-03-26T04:05:53.956+0000] {standard_task_runner.py:63} INFO - Started process 776 to run task
+[2026-03-26T04:05:53.976+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'transform.transform_dim_payments', 'scheduled__2024-12-14T00:00:00+00:00', '--job-id', '130', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmpkag_opp5']
+[2026-03-26T04:05:54.049+0000] {standard_task_runner.py:91} INFO - Job 130: Subtask transform.transform_dim_payments
+[2026-03-26T04:05:54.646+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.transform.transform_dim_payments scheduled__2024-12-14T00:00:00+00:00 [running]> on host 2d1a3218d35e
+[2026-03-26T04:05:55.413+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='transform.transform_dim_payments' AIRFLOW_CTX_EXECUTION_DATE='2024-12-14T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-12-14T00:00:00+00:00'
+[2026-03-26T04:05:55.445+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-26T04:05:56.838+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-26T04:05:56.846+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:05:56.899+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:05:58.553+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:05:58.846+0000] {logging_mixin.py:188} INFO - Đã transform và lưu dữ liệu vào dim_payments
+[2026-03-26T04:05:58.849+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-03-26T04:05:58.850+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-26T04:05:58.882+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=e_commerce_dw_etl, task_id=transform.transform_dim_payments, run_id=scheduled__2024-12-14T00:00:00+00:00, execution_date=20241214T000000, start_date=20260326T040553, end_date=20260326T040558
+[2026-03-26T04:05:59.256+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-03-26T04:05:59.331+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-26T04:05:59.348+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

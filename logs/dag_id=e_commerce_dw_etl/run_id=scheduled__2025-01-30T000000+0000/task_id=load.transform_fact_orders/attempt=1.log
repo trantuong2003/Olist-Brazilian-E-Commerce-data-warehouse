@@ -1,0 +1,145 @@
+[2026-03-26T03:43:25.701+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T03:43:25.957+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.load.transform_fact_orders scheduled__2025-01-30T00:00:00+00:00 [queued]>
+[2026-03-26T03:43:26.034+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.load.transform_fact_orders scheduled__2025-01-30T00:00:00+00:00 [queued]>
+[2026-03-26T03:43:26.051+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T03:43:26.218+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load.transform_fact_orders> on 2025-01-30 00:00:00+00:00
+[2026-03-26T03:43:26.331+0000] {standard_task_runner.py:63} INFO - Started process 2158 to run task
+[2026-03-26T03:43:26.351+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'load.transform_fact_orders', 'scheduled__2025-01-30T00:00:00+00:00', '--job-id', '698', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmpx2x0uo8r']
+[2026-03-26T03:43:26.365+0000] {standard_task_runner.py:91} INFO - Job 698: Subtask load.transform_fact_orders
+[2026-03-26T03:43:26.984+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.load.transform_fact_orders scheduled__2025-01-30T00:00:00+00:00 [running]> on host 031edd3e030e
+[2026-03-26T03:43:28.668+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='load.transform_fact_orders' AIRFLOW_CTX_EXECUTION_DATE='2025-01-30T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-30T00:00:00+00:00'
+[2026-03-26T03:43:28.684+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-26T03:43:28.791+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-26T03:43:28.810+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T03:43:28.886+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T03:43:28.932+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T03:43:28.979+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T03:43:29.045+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T03:43:29.170+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T03:43:29.267+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T03:43:29.361+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T03:43:29.523+0000] {logging_mixin.py:188} INFO - Các cột trong DataFrame sau khi merge:
+[2026-03-26T03:43:29.536+0000] {logging_mixin.py:188} INFO - Index(['order_status', 'order_purchase_timestamp', 'order_approved_at',
+       'order_delivered_carrier_date', 'order_delivered_customer_date',
+       'order_estimated_delivery_date', 'order_item_id', 'product_id',
+       'seller_id', 'shipping_limit_date', 'price', 'freight_value',
+       'order_id', 'payment_sequential', 'payment_type',
+       'payment_installments', 'payment_value', 'customer_id',
+       'customer_zip_code_prefix'],
+      dtype='object')
+[2026-03-26T03:43:29.699+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T03:43:30.168+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-26T03:43:30.170+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: table "fact_orders" does not exist
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/transform_fact_orders.py", line 59, in transform_fact_orders
+    warehouse_operator.save_data_to_postgres(
+  File "/opt/airflow/plugins/postgresql_operator.py", line 23, in save_data_to_postgres
+    df.to_sql(table_name, engine, schema=schema, if_exists=if_exists, index=False)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/generic.py", line 2987, in to_sql
+    return sql.to_sql(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 695, in to_sql
+    return pandas_sql.to_sql(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1728, in to_sql
+    table = self.prep_table(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1631, in prep_table
+    table.create()
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 831, in create
+    self.pd_sql.drop_table(self.name, self.schema)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1782, in drop_table
+    self.get_table(table_name, schema).drop(bind=self.connectable)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 979, in drop
+    bind._run_ddl_visitor(ddl.SchemaDropper, self, checkfirst=checkfirst)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3238, in _run_ddl_visitor
+    conn._run_ddl_visitor(visitorcallable, element, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2221, in _run_ddl_visitor
+    visitorcallable(self.dialect, self, **kwargs).traverse_single(element)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/sql/visitors.py", line 524, in traverse_single
+    return meth(obj, **kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/sql/ddl.py", line 1106, in visit_table
+    self.connection.execute(DropTable(table))
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/sql/ddl.py", line 80, in _execute_on_connection
+    return connection._execute_ddl(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1477, in _execute_ddl
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) table "fact_orders" does not exist
+
+[SQL: 
+DROP TABLE warehouse.fact_orders]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2026-03-26T03:43:30.732+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=e_commerce_dw_etl, task_id=load.transform_fact_orders, run_id=scheduled__2025-01-30T00:00:00+00:00, execution_date=20250130T000000, start_date=20260326T034325, end_date=20260326T034330
+[2026-03-26T03:43:31.289+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 698 for task load.transform_fact_orders ((psycopg2.errors.UndefinedTable) table "fact_orders" does not exist
+
+[SQL: 
+DROP TABLE warehouse.fact_orders]
+(Background on this error at: https://sqlalche.me/e/14/f405); 2158)
+[2026-03-26T03:43:31.682+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-26T03:43:31.798+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-26T03:43:31.813+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-03-26T04:08:58.131+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T04:08:58.423+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.load.transform_fact_orders scheduled__2025-01-30T00:00:00+00:00 [queued]>
+[2026-03-26T04:08:58.541+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.load.transform_fact_orders scheduled__2025-01-30T00:00:00+00:00 [queued]>
+[2026-03-26T04:08:58.547+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T04:08:58.609+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load.transform_fact_orders> on 2025-01-30 00:00:00+00:00
+[2026-03-26T04:08:58.659+0000] {standard_task_runner.py:63} INFO - Started process 1144 to run task
+[2026-03-26T04:08:58.681+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'load.transform_fact_orders', 'scheduled__2025-01-30T00:00:00+00:00', '--job-id', '236', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmp79ip1_8t']
+[2026-03-26T04:08:58.715+0000] {standard_task_runner.py:91} INFO - Job 236: Subtask load.transform_fact_orders
+[2026-03-26T04:08:58.998+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.load.transform_fact_orders scheduled__2025-01-30T00:00:00+00:00 [running]> on host 2d1a3218d35e
+[2026-03-26T04:09:00.427+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='load.transform_fact_orders' AIRFLOW_CTX_EXECUTION_DATE='2025-01-30T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-30T00:00:00+00:00'
+[2026-03-26T04:09:00.431+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-26T04:09:00.522+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-26T04:09:00.527+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:09:00.585+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:09:03.748+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:09:03.769+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:09:03.791+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:09:03.822+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:09:03.837+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:09:03.848+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:09:05.259+0000] {logging_mixin.py:188} INFO - Các cột trong DataFrame sau khi merge:
+[2026-03-26T04:09:05.263+0000] {logging_mixin.py:188} INFO - Index(['order_id', 'customer_id', 'order_status', 'order_purchase_timestamp',
+       'order_approved_at', 'order_delivered_carrier_date',
+       'order_delivered_customer_date', 'order_estimated_delivery_date',
+       'order_item_id', 'product_id', 'seller_id', 'shipping_limit_date',
+       'price', 'freight_value', 'payment_sequential', 'payment_type',
+       'payment_installments', 'payment_value', 'customer_zip_code_prefix'],
+      dtype='object')
+[2026-03-26T04:09:06.129+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:09:40.435+0000] {logging_mixin.py:188} INFO - Đã transform và lưu dữ liệu vào fact_orders
+[2026-03-26T04:09:40.517+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-03-26T04:09:40.518+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-26T04:09:40.541+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=e_commerce_dw_etl, task_id=load.transform_fact_orders, run_id=scheduled__2025-01-30T00:00:00+00:00, execution_date=20250130T000000, start_date=20260326T040858, end_date=20260326T040940
+[2026-03-26T04:09:40.680+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-03-26T04:09:40.720+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-26T04:09:40.749+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

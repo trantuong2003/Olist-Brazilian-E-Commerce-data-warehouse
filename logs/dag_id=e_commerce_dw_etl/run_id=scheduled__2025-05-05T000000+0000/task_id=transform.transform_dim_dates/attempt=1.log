@@ -1,0 +1,93 @@
+[2026-03-26T04:15:10.140+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T04:15:10.262+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_dates scheduled__2025-05-05T00:00:00+00:00 [queued]>
+[2026-03-26T04:15:10.309+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_dates scheduled__2025-05-05T00:00:00+00:00 [queued]>
+[2026-03-26T04:15:10.319+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T04:15:11.674+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform.transform_dim_dates> on 2025-05-05 00:00:00+00:00
+[2026-03-26T04:15:11.745+0000] {standard_task_runner.py:63} INFO - Started process 1860 to run task
+[2026-03-26T04:15:11.835+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'transform.transform_dim_dates', 'scheduled__2025-05-05T00:00:00+00:00', '--job-id', '440', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmpbi0c6d73']
+[2026-03-26T04:15:11.858+0000] {standard_task_runner.py:91} INFO - Job 440: Subtask transform.transform_dim_dates
+[2026-03-26T04:15:12.263+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.transform.transform_dim_dates scheduled__2025-05-05T00:00:00+00:00 [running]> on host 2d1a3218d35e
+[2026-03-26T04:15:13.996+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='transform.transform_dim_dates' AIRFLOW_CTX_EXECUTION_DATE='2025-05-05T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-05-05T00:00:00+00:00'
+[2026-03-26T04:15:14.001+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-26T04:15:14.541+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-26T04:15:14.547+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:15:15.446+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-26T04:15:15.454+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+  File "/home/airflow/.local/lib/python3.10/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UndefinedTable: relation "warehouse.dim_dates" does not exist
+LINE 1: INSERT INTO warehouse.dim_dates (date_key, day, month, year,...
+                    ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/transform_dim_dates.py", line 25, in transform_dim_dates
+    warehouse_operator.save_data_to_postgres(
+  File "/opt/airflow/plugins/postgresql_operator.py", line 25, in save_data_to_postgres
+    df.to_sql(table_name, engine, schema=schema, if_exists=if_exists, index=False)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/generic.py", line 2987, in to_sql
+    return sql.to_sql(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 695, in to_sql
+    return pandas_sql.to_sql(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1738, in to_sql
+    total_inserted = sql_engine.insert_records(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1335, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1325, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 946, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 853, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+  File "/home/airflow/.local/lib/python3.10/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "warehouse.dim_dates" does not exist
+LINE 1: INSERT INTO warehouse.dim_dates (date_key, day, month, year,...
+                    ^
+
+[SQL: INSERT INTO warehouse.dim_dates (date_key, day, month, year, quarter, day_of_week, day_name, month_name, is_weekend) VALUES (%(date_key)s, %(day)s, %(month)s, %(year)s, %(quarter)s, %(day_of_week)s, %(day_name)s, %(month_name)s, %(is_weekend)s)]
+[parameters: ({'date_key': datetime.datetime(2016, 1, 1, 0, 0), 'day': 1, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 4, 'day_name': 'Friday', 'month_name': 'January', 'is_weekend': False}, {'date_key': datetime.datetime(2016, 1, 2, 0, 0), 'day': 2, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 5, 'day_name': 'Saturday', 'month_name': 'January', 'is_weekend': True}, {'date_key': datetime.datetime(2016, 1, 3, 0, 0), 'day': 3, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 6, 'day_name': 'Sunday', 'month_name': 'January', 'is_weekend': True}, {'date_key': datetime.datetime(2016, 1, 4, 0, 0), 'day': 4, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 0, 'day_name': 'Monday', 'month_name': 'January', 'is_weekend': False}, {'date_key': datetime.datetime(2016, 1, 5, 0, 0), 'day': 5, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 1, 'day_name': 'Tuesday', 'month_name': 'January', 'is_weekend': False}, {'date_key': datetime.datetime(2016, 1, 6, 0, 0), 'day': 6, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 2, 'day_name': 'Wednesday', 'month_name': 'January', 'is_weekend': False}, {'date_key': datetime.datetime(2016, 1, 7, 0, 0), 'day': 7, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 3, 'day_name': 'Thursday', 'month_name': 'January', 'is_weekend': False}, {'date_key': datetime.datetime(2016, 1, 8, 0, 0), 'day': 8, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 4, 'day_name': 'Friday', 'month_name': 'January', 'is_weekend': False}  ... displaying 10 of 3653 total bound parameter sets ...  {'date_key': datetime.datetime(2025, 12, 30, 0, 0), 'day': 30, 'month': 12, 'year': 2025, 'quarter': 4, 'day_of_week': 1, 'day_name': 'Tuesday', 'month_name': 'December', 'is_weekend': False}, {'date_key': datetime.datetime(2025, 12, 31, 0, 0), 'day': 31, 'month': 12, 'year': 2025, 'quarter': 4, 'day_of_week': 2, 'day_name': 'Wednesday', 'month_name': 'December', 'is_weekend': False})]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2026-03-26T04:15:15.566+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=e_commerce_dw_etl, task_id=transform.transform_dim_dates, run_id=scheduled__2025-05-05T00:00:00+00:00, execution_date=20250505T000000, start_date=20260326T041510, end_date=20260326T041515
+[2026-03-26T04:15:15.898+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 440 for task transform.transform_dim_dates ((psycopg2.errors.UndefinedTable) relation "warehouse.dim_dates" does not exist
+LINE 1: INSERT INTO warehouse.dim_dates (date_key, day, month, year,...
+                    ^
+
+[SQL: INSERT INTO warehouse.dim_dates (date_key, day, month, year, quarter, day_of_week, day_name, month_name, is_weekend) VALUES (%(date_key)s, %(day)s, %(month)s, %(year)s, %(quarter)s, %(day_of_week)s, %(day_name)s, %(month_name)s, %(is_weekend)s)]
+[parameters: ({'date_key': datetime.datetime(2016, 1, 1, 0, 0), 'day': 1, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 4, 'day_name': 'Friday', 'month_name': 'January', 'is_weekend': False}, {'date_key': datetime.datetime(2016, 1, 2, 0, 0), 'day': 2, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 5, 'day_name': 'Saturday', 'month_name': 'January', 'is_weekend': True}, {'date_key': datetime.datetime(2016, 1, 3, 0, 0), 'day': 3, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 6, 'day_name': 'Sunday', 'month_name': 'January', 'is_weekend': True}, {'date_key': datetime.datetime(2016, 1, 4, 0, 0), 'day': 4, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 0, 'day_name': 'Monday', 'month_name': 'January', 'is_weekend': False}, {'date_key': datetime.datetime(2016, 1, 5, 0, 0), 'day': 5, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 1, 'day_name': 'Tuesday', 'month_name': 'January', 'is_weekend': False}, {'date_key': datetime.datetime(2016, 1, 6, 0, 0), 'day': 6, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 2, 'day_name': 'Wednesday', 'month_name': 'January', 'is_weekend': False}, {'date_key': datetime.datetime(2016, 1, 7, 0, 0), 'day': 7, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 3, 'day_name': 'Thursday', 'month_name': 'January', 'is_weekend': False}, {'date_key': datetime.datetime(2016, 1, 8, 0, 0), 'day': 8, 'month': 1, 'year': 2016, 'quarter': 1, 'day_of_week': 4, 'day_name': 'Friday', 'month_name': 'January', 'is_weekend': False}  ... displaying 10 of 3653 total bound parameter sets ...  {'date_key': datetime.datetime(2025, 12, 30, 0, 0), 'day': 30, 'month': 12, 'year': 2025, 'quarter': 4, 'day_of_week': 1, 'day_name': 'Tuesday', 'month_name': 'December', 'is_weekend': False}, {'date_key': datetime.datetime(2025, 12, 31, 0, 0), 'day': 31, 'month': 12, 'year': 2025, 'quarter': 4, 'day_of_week': 2, 'day_name': 'Wednesday', 'month_name': 'December', 'is_weekend': False})]
+(Background on this error at: https://sqlalche.me/e/14/f405); 1860)
+[2026-03-26T04:15:16.061+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-26T04:15:16.125+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

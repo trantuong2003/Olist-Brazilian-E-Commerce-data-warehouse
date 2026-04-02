@@ -1,0 +1,96 @@
+[2026-03-26T04:29:18.334+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T04:29:18.577+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_sellers scheduled__2026-01-01T00:00:00+00:00 [queued]>
+[2026-03-26T04:29:18.626+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_sellers scheduled__2026-01-01T00:00:00+00:00 [queued]>
+[2026-03-26T04:29:18.640+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T04:29:18.695+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform.transform_dim_sellers> on 2026-01-01 00:00:00+00:00
+[2026-03-26T04:29:18.733+0000] {standard_task_runner.py:63} INFO - Started process 3747 to run task
+[2026-03-26T04:29:18.750+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'transform.transform_dim_sellers', 'scheduled__2026-01-01T00:00:00+00:00', '--job-id', '1029', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmp8bnw022d']
+[2026-03-26T04:29:18.757+0000] {standard_task_runner.py:91} INFO - Job 1029: Subtask transform.transform_dim_sellers
+[2026-03-26T04:29:19.098+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.transform.transform_dim_sellers scheduled__2026-01-01T00:00:00+00:00 [running]> on host 2d1a3218d35e
+[2026-03-26T04:29:20.293+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='transform.transform_dim_sellers' AIRFLOW_CTX_EXECUTION_DATE='2026-01-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-01-01T00:00:00+00:00'
+[2026-03-26T04:29:20.295+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-26T04:29:20.379+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-26T04:29:20.390+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:29:20.427+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:29:20.548+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:29:21.052+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-26T04:29:21.057+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+  File "/home/airflow/.local/lib/python3.10/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UndefinedTable: relation "warehouse.dim_sellers" does not exist
+LINE 1: INSERT INTO warehouse.dim_sellers (seller_id, seller_zip_cod...
+                    ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/transform_dim_sellers.py", line 24, in transform_dim_sellers
+    warehouse_operator.save_data_to_postgres(
+  File "/opt/airflow/plugins/postgresql_operator.py", line 25, in save_data_to_postgres
+    df.to_sql(table_name, engine, schema=schema, if_exists=if_exists, index=False)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/generic.py", line 2987, in to_sql
+    return sql.to_sql(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 695, in to_sql
+    return pandas_sql.to_sql(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1738, in to_sql
+    total_inserted = sql_engine.insert_records(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1335, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1325, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 946, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 853, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+  File "/home/airflow/.local/lib/python3.10/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "warehouse.dim_sellers" does not exist
+LINE 1: INSERT INTO warehouse.dim_sellers (seller_id, seller_zip_cod...
+                    ^
+
+[SQL: INSERT INTO warehouse.dim_sellers (seller_id, seller_zip_code_prefix, seller_city, seller_state, seller_key, last_updated) VALUES (%(seller_id)s, %(seller_zip_code_prefix)s, %(seller_city)s, %(seller_state)s, %(seller_key)s, %(last_updated)s)]
+[parameters: ({'seller_id': '0015a82c2db000af6aaaf3ae2ecb0532', 'seller_zip_code_prefix': '09080', 'seller_city': 'Santo Andre', 'seller_state': 'SP', 'seller_key': 1, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '001cca7ae9ae17fb1caed9dfb1094831', 'seller_zip_code_prefix': '29156', 'seller_city': 'Cariacica', 'seller_state': 'ES', 'seller_key': 2, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '001e6ad469a905060d959994f1b41e4f', 'seller_zip_code_prefix': '24754', 'seller_city': 'Sao Goncalo', 'seller_state': 'RJ', 'seller_key': 3, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '002100f778ceb8431b7a1020ff7ab48f', 'seller_zip_code_prefix': '14405', 'seller_city': 'Franca', 'seller_state': 'SP', 'seller_key': 4, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '003554e2dce176b5555353e4f3555ac8', 'seller_zip_code_prefix': '74565', 'seller_city': 'Goiania', 'seller_state': 'GO', 'seller_key': 5, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '004c9cd9d87a3c30c522c48c4fc07416', 'seller_zip_code_prefix': '14940', 'seller_city': 'Ibitinga', 'seller_state': 'SP', 'seller_key': 6, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '00720abe85ba0859807595bbf045a33b', 'seller_zip_code_prefix': '07070', 'seller_city': 'Guarulhos', 'seller_state': 'SP', 'seller_key': 7, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '00ab3eff1b5192e5f1a63bcecfee11c8', 'seller_zip_code_prefix': '04164', 'seller_city': 'Sao Paulo', 'seller_state': 'SP', 'seller_key': 8, 'last_updated': datetime.date(2026, 3, 26)}  ... displaying 10 of 3095 total bound parameter sets ...  {'seller_id': 'fffd5413c0700ac820c7069d66d98c89', 'seller_zip_code_prefix': '13908', 'seller_city': 'Amparo', 'seller_state': 'SP', 'seller_key': 3094, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': 'ffff564a4f9085cd26170f4732393726', 'seller_zip_code_prefix': '13070', 'seller_city': 'Campinas', 'seller_state': 'SP', 'seller_key': 3095, 'last_updated': datetime.date(2026, 3, 26)})]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2026-03-26T04:29:21.135+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=e_commerce_dw_etl, task_id=transform.transform_dim_sellers, run_id=scheduled__2026-01-01T00:00:00+00:00, execution_date=20260101T000000, start_date=20260326T042918, end_date=20260326T042921
+[2026-03-26T04:29:21.179+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 1029 for task transform.transform_dim_sellers ((psycopg2.errors.UndefinedTable) relation "warehouse.dim_sellers" does not exist
+LINE 1: INSERT INTO warehouse.dim_sellers (seller_id, seller_zip_cod...
+                    ^
+
+[SQL: INSERT INTO warehouse.dim_sellers (seller_id, seller_zip_code_prefix, seller_city, seller_state, seller_key, last_updated) VALUES (%(seller_id)s, %(seller_zip_code_prefix)s, %(seller_city)s, %(seller_state)s, %(seller_key)s, %(last_updated)s)]
+[parameters: ({'seller_id': '0015a82c2db000af6aaaf3ae2ecb0532', 'seller_zip_code_prefix': '09080', 'seller_city': 'Santo Andre', 'seller_state': 'SP', 'seller_key': 1, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '001cca7ae9ae17fb1caed9dfb1094831', 'seller_zip_code_prefix': '29156', 'seller_city': 'Cariacica', 'seller_state': 'ES', 'seller_key': 2, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '001e6ad469a905060d959994f1b41e4f', 'seller_zip_code_prefix': '24754', 'seller_city': 'Sao Goncalo', 'seller_state': 'RJ', 'seller_key': 3, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '002100f778ceb8431b7a1020ff7ab48f', 'seller_zip_code_prefix': '14405', 'seller_city': 'Franca', 'seller_state': 'SP', 'seller_key': 4, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '003554e2dce176b5555353e4f3555ac8', 'seller_zip_code_prefix': '74565', 'seller_city': 'Goiania', 'seller_state': 'GO', 'seller_key': 5, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '004c9cd9d87a3c30c522c48c4fc07416', 'seller_zip_code_prefix': '14940', 'seller_city': 'Ibitinga', 'seller_state': 'SP', 'seller_key': 6, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '00720abe85ba0859807595bbf045a33b', 'seller_zip_code_prefix': '07070', 'seller_city': 'Guarulhos', 'seller_state': 'SP', 'seller_key': 7, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': '00ab3eff1b5192e5f1a63bcecfee11c8', 'seller_zip_code_prefix': '04164', 'seller_city': 'Sao Paulo', 'seller_state': 'SP', 'seller_key': 8, 'last_updated': datetime.date(2026, 3, 26)}  ... displaying 10 of 3095 total bound parameter sets ...  {'seller_id': 'fffd5413c0700ac820c7069d66d98c89', 'seller_zip_code_prefix': '13908', 'seller_city': 'Amparo', 'seller_state': 'SP', 'seller_key': 3094, 'last_updated': datetime.date(2026, 3, 26)}, {'seller_id': 'ffff564a4f9085cd26170f4732393726', 'seller_zip_code_prefix': '13070', 'seller_city': 'Campinas', 'seller_state': 'SP', 'seller_key': 3095, 'last_updated': datetime.date(2026, 3, 26)})]
+(Background on this error at: https://sqlalche.me/e/14/f405); 3747)
+[2026-03-26T04:29:21.248+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-26T04:29:21.337+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-26T04:29:21.361+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

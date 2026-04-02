@@ -1,0 +1,37 @@
+[2026-03-26T04:24:20.199+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T04:24:20.286+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.load.transform_fact_orders scheduled__2025-09-21T00:00:00+00:00 [queued]>
+[2026-03-26T04:24:20.343+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.load.transform_fact_orders scheduled__2025-09-21T00:00:00+00:00 [queued]>
+[2026-03-26T04:24:20.361+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T04:24:20.790+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load.transform_fact_orders> on 2025-09-21 00:00:00+00:00
+[2026-03-26T04:24:20.840+0000] {standard_task_runner.py:63} INFO - Started process 3063 to run task
+[2026-03-26T04:24:20.863+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'load.transform_fact_orders', 'scheduled__2025-09-21T00:00:00+00:00', '--job-id', '815', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmp57nmuxgv']
+[2026-03-26T04:24:20.922+0000] {standard_task_runner.py:91} INFO - Job 815: Subtask load.transform_fact_orders
+[2026-03-26T04:24:21.277+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.load.transform_fact_orders scheduled__2025-09-21T00:00:00+00:00 [running]> on host 2d1a3218d35e
+[2026-03-26T04:24:21.876+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='load.transform_fact_orders' AIRFLOW_CTX_EXECUTION_DATE='2025-09-21T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-21T00:00:00+00:00'
+[2026-03-26T04:24:21.880+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-26T04:24:22.797+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-26T04:24:22.804+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:24:22.850+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:24:22.882+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:24:22.912+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:24:24.713+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:24:24.789+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:24:24.843+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:24:24.860+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:24:24.969+0000] {logging_mixin.py:188} INFO - Các cột trong DataFrame sau khi merge:
+[2026-03-26T04:24:24.971+0000] {logging_mixin.py:188} INFO - Index(['order_status', 'order_purchase_timestamp', 'order_approved_at',
+       'order_delivered_carrier_date', 'order_delivered_customer_date',
+       'order_estimated_delivery_date', 'order_item_id', 'product_id',
+       'seller_id', 'shipping_limit_date', 'price', 'freight_value',
+       'order_id', 'payment_sequential', 'payment_type',
+       'payment_installments', 'payment_value', 'customer_id',
+       'customer_zip_code_prefix'],
+      dtype='object')
+[2026-03-26T04:24:25.021+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:24:25.372+0000] {logging_mixin.py:188} INFO - Đã transform và lưu dữ liệu vào fact_orders
+[2026-03-26T04:24:25.525+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-03-26T04:24:25.538+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-26T04:24:25.598+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=e_commerce_dw_etl, task_id=load.transform_fact_orders, run_id=scheduled__2025-09-21T00:00:00+00:00, execution_date=20250921T000000, start_date=20260326T042420, end_date=20260326T042425
+[2026-03-26T04:24:26.730+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-03-26T04:24:26.928+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-26T04:24:26.968+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

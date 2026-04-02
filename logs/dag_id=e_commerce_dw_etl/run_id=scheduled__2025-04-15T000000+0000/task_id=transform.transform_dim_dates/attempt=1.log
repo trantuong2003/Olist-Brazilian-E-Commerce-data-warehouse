@@ -1,0 +1,13 @@
+[2026-03-26T03:46:06.146+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T03:46:06.308+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_dates scheduled__2025-04-15T00:00:00+00:00 [queued]>
+[2026-03-26T03:46:06.340+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_dates scheduled__2025-04-15T00:00:00+00:00 [queued]>
+[2026-03-26T03:46:06.348+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T03:46:06.833+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform.transform_dim_dates> on 2025-04-15 00:00:00+00:00
+[2026-03-26T03:46:06.845+0000] {standard_task_runner.py:63} INFO - Started process 3022 to run task
+[2026-03-26T03:46:06.855+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'transform.transform_dim_dates', 'scheduled__2025-04-15T00:00:00+00:00', '--job-id', '1069', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmpw0a98ot1']
+[2026-03-26T03:46:06.865+0000] {standard_task_runner.py:91} INFO - Job 1069: Subtask transform.transform_dim_dates
+[2026-03-26T03:46:07.208+0000] {local_task_job_runner.py:124} ERROR - Received SIGTERM. Terminating subprocesses
+[2026-03-26T03:46:07.215+0000] {process_utils.py:132} INFO - Sending 15 to group 3022. PIDs of all processes in the group: [3022]
+[2026-03-26T03:46:07.240+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 3022
+[2026-03-26T03:46:07.413+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=3022, status='terminated', exitcode=<Negsignal.SIGTERM: -15>, started='03:46:06') (3022) terminated with exit code -15
+[2026-03-26T03:46:07.417+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 143

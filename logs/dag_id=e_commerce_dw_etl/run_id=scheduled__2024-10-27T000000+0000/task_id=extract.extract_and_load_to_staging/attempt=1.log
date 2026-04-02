@@ -1,0 +1,435 @@
+[2026-03-25T08:41:20.753+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-25T08:41:20.791+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T08:41:20.804+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T08:41:20.805+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-25T08:41:20.823+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extract.extract_and_load_to_staging> on 2024-10-27 00:00:00+00:00
+[2026-03-25T08:41:20.833+0000] {standard_task_runner.py:63} INFO - Started process 519 to run task
+[2026-03-25T08:41:20.837+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'extract.extract_and_load_to_staging', 'scheduled__2024-10-27T00:00:00+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmp_m65y1i3']
+[2026-03-25T08:41:20.842+0000] {standard_task_runner.py:91} INFO - Job 16: Subtask extract.extract_and_load_to_staging
+[2026-03-25T08:41:20.934+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [running]> on host bcd9e4848a6d
+[2026-03-25T08:41:21.107+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='extract.extract_and_load_to_staging' AIRFLOW_CTX_EXECUTION_DATE='2024-10-27T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-27T00:00:00+00:00'
+[2026-03-25T08:41:21.109+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-25T08:41:21.552+0000] {mysql_operator.py:13} ERROR - Can't connect to mysql database
+[2026-03-25T08:41:21.582+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-25T08:41:21.624+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/extract_data.py", line 30, in extract_and_load_to_staging
+    df = source_operator.get_data_to_pd(f"SELECT * FROM {table}")
+  File "/opt/airflow/plugins/mysql_operator.py", line 15, in get_data_to_pd
+    return self.mysqlhook.get_pandas_df(query)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/common/sql/hooks/sql.py", line 262, in get_pandas_df
+    with closing(self.get_conn()) as conn:
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/mysql/hooks/mysql.py", line 188, in get_conn
+    conn = self.connection or self.get_connection(getattr(self, self.conn_name_attr))
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/connection.py", line 519, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `mysql` isn't defined
+[2026-03-25T08:41:21.733+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=e_commerce_dw_etl, task_id=extract.extract_and_load_to_staging, run_id=scheduled__2024-10-27T00:00:00+00:00, execution_date=20241027T000000, start_date=20260325T084120, end_date=20260325T084121
+[2026-03-25T08:41:21.904+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 16 for task extract.extract_and_load_to_staging (The conn_id `mysql` isn't defined; 519)
+[2026-03-25T08:41:21.940+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-25T08:41:22.010+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-25T08:41:22.029+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-03-25T09:30:04.946+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-25T09:30:05.003+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T09:30:05.017+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T09:30:05.018+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-25T09:30:05.241+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extract.extract_and_load_to_staging> on 2024-10-27 00:00:00+00:00
+[2026-03-25T09:30:05.251+0000] {standard_task_runner.py:63} INFO - Started process 211 to run task
+[2026-03-25T09:30:05.259+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'extract.extract_and_load_to_staging', 'scheduled__2024-10-27T00:00:00+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmpfbi80vb6']
+[2026-03-25T09:30:05.264+0000] {standard_task_runner.py:91} INFO - Job 8: Subtask extract.extract_and_load_to_staging
+[2026-03-25T09:30:05.373+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [running]> on host 0d903260eca4
+[2026-03-25T09:30:05.522+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='extract.extract_and_load_to_staging' AIRFLOW_CTX_EXECUTION_DATE='2024-10-27T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-27T00:00:00+00:00'
+[2026-03-25T09:30:05.523+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-25T09:30:05.908+0000] {mysql_operator.py:13} ERROR - Can't connect to mysql database
+[2026-03-25T09:30:05.919+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-25T09:30:05.931+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/extract_data.py", line 30, in extract_and_load_to_staging
+    df = source_operator.get_data_to_pd(f"SELECT * FROM {table}")
+  File "/opt/airflow/plugins/mysql_operator.py", line 15, in get_data_to_pd
+    return self.mysqlhook.get_pandas_df(query)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/common/sql/hooks/sql.py", line 262, in get_pandas_df
+    with closing(self.get_conn()) as conn:
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/mysql/hooks/mysql.py", line 188, in get_conn
+    conn = self.connection or self.get_connection(getattr(self, self.conn_name_attr))
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/connection.py", line 519, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `mysql` isn't defined
+[2026-03-25T09:30:05.959+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=e_commerce_dw_etl, task_id=extract.extract_and_load_to_staging, run_id=scheduled__2024-10-27T00:00:00+00:00, execution_date=20241027T000000, start_date=20260325T093005, end_date=20260325T093005
+[2026-03-25T09:30:06.000+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 8 for task extract.extract_and_load_to_staging (The conn_id `mysql` isn't defined; 211)
+[2026-03-25T09:30:06.026+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-25T09:30:06.110+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-25T09:30:06.132+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-03-25T10:19:31.157+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-25T10:19:31.285+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T10:19:31.298+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T10:19:31.299+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-25T10:19:31.481+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extract.extract_and_load_to_staging> on 2024-10-27 00:00:00+00:00
+[2026-03-25T10:19:31.489+0000] {standard_task_runner.py:63} INFO - Started process 242 to run task
+[2026-03-25T10:19:31.495+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'extract.extract_and_load_to_staging', 'scheduled__2024-10-27T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmp41grwn0q']
+[2026-03-25T10:19:31.500+0000] {standard_task_runner.py:91} INFO - Job 4: Subtask extract.extract_and_load_to_staging
+[2026-03-25T10:19:31.670+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [running]> on host 1f1ff5b841ce
+[2026-03-25T10:19:31.852+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='extract.extract_and_load_to_staging' AIRFLOW_CTX_EXECUTION_DATE='2024-10-27T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-27T00:00:00+00:00'
+[2026-03-25T10:19:31.855+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-25T10:19:32.762+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-25T10:19:32.765+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-25T10:19:36.881+0000] {mysql_operator.py:13} ERROR - Can't connect to mysql database
+[2026-03-25T10:19:36.885+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-25T10:19:40.800+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-25T10:19:40.801+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/extract_data.py", line 30, in extract_and_load_to_staging
+    df = source_operator.get_data_to_pd(f"SELECT * FROM {table}")
+  File "/opt/airflow/plugins/mysql_operator.py", line 15, in get_data_to_pd
+    return self.mysqlhook.get_pandas_df(query)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/common/sql/hooks/sql.py", line 262, in get_pandas_df
+    with closing(self.get_conn()) as conn:
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/mysql/hooks/mysql.py", line 196, in get_conn
+    return MySQLdb.connect(**conn_config)
+  File "/home/airflow/.local/lib/python3.10/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2005, "Unknown server host 'mysql' (-2)")
+[2026-03-25T10:19:40.897+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=e_commerce_dw_etl, task_id=extract.extract_and_load_to_staging, run_id=scheduled__2024-10-27T00:00:00+00:00, execution_date=20241027T000000, start_date=20260325T101931, end_date=20260325T101940
+[2026-03-25T10:19:40.962+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 4 for task extract.extract_and_load_to_staging ((2005, "Unknown server host 'mysql' (-2)"); 242)
+[2026-03-25T10:19:40.997+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-25T10:19:41.067+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-25T10:19:41.080+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-03-25T10:54:15.079+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-25T10:54:15.174+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T10:54:15.186+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T10:54:15.186+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-25T10:54:15.621+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extract.extract_and_load_to_staging> on 2024-10-27 00:00:00+00:00
+[2026-03-25T10:54:15.640+0000] {standard_task_runner.py:63} INFO - Started process 240 to run task
+[2026-03-25T10:54:15.648+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'extract.extract_and_load_to_staging', 'scheduled__2024-10-27T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmp7k6xt2_q']
+[2026-03-25T10:54:15.653+0000] {standard_task_runner.py:91} INFO - Job 4: Subtask extract.extract_and_load_to_staging
+[2026-03-25T10:54:23.249+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [running]> on host b7a6f340f223
+[2026-03-25T10:54:24.068+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='extract.extract_and_load_to_staging' AIRFLOW_CTX_EXECUTION_DATE='2024-10-27T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-27T00:00:00+00:00'
+[2026-03-25T10:54:24.071+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-25T10:54:24.553+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-25T10:54:24.557+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-25T10:54:28.613+0000] {mysql_operator.py:13} ERROR - Can't connect to mysql database
+[2026-03-25T10:54:28.719+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-25T10:54:32.573+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-25T10:54:32.577+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/extract_data.py", line 30, in extract_and_load_to_staging
+    df = source_operator.get_data_to_pd(f"SELECT * FROM {table}")
+  File "/opt/airflow/plugins/mysql_operator.py", line 15, in get_data_to_pd
+    return self.mysqlhook.get_pandas_df(query)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/common/sql/hooks/sql.py", line 262, in get_pandas_df
+    with closing(self.get_conn()) as conn:
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/mysql/hooks/mysql.py", line 196, in get_conn
+    return MySQLdb.connect(**conn_config)
+  File "/home/airflow/.local/lib/python3.10/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2005, "Unknown server host 'mysql' (-2)")
+[2026-03-25T10:54:32.622+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=e_commerce_dw_etl, task_id=extract.extract_and_load_to_staging, run_id=scheduled__2024-10-27T00:00:00+00:00, execution_date=20241027T000000, start_date=20260325T105415, end_date=20260325T105432
+[2026-03-25T10:54:32.654+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 4 for task extract.extract_and_load_to_staging ((2005, "Unknown server host 'mysql' (-2)"); 240)
+[2026-03-25T10:54:32.724+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-25T10:54:32.779+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-25T10:54:32.805+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-03-25T11:14:23.228+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-25T11:14:23.287+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T11:14:23.304+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T11:14:23.305+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-25T11:14:23.416+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extract.extract_and_load_to_staging> on 2024-10-27 00:00:00+00:00
+[2026-03-25T11:14:23.426+0000] {standard_task_runner.py:63} INFO - Started process 290 to run task
+[2026-03-25T11:14:23.433+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'extract.extract_and_load_to_staging', 'scheduled__2024-10-27T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmpz_v_zyui']
+[2026-03-25T11:14:23.444+0000] {standard_task_runner.py:91} INFO - Job 4: Subtask extract.extract_and_load_to_staging
+[2026-03-25T11:14:23.563+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [running]> on host d26a046c4728
+[2026-03-25T11:14:23.697+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='extract.extract_and_load_to_staging' AIRFLOW_CTX_EXECUTION_DATE='2024-10-27T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-27T00:00:00+00:00'
+[2026-03-25T11:14:23.700+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-25T11:14:24.066+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-25T11:14:28.077+0000] {mysql_operator.py:13} ERROR - Can't connect to mysql database
+[2026-03-25T11:14:28.122+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-25T11:14:31.983+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-25T11:14:31.984+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/extract_data.py", line 30, in extract_and_load_to_staging
+    df = source_operator.get_data_to_pd(f"SELECT * FROM {table}")
+  File "/opt/airflow/plugins/mysql_operator.py", line 15, in get_data_to_pd
+    return self.mysqlhook.get_pandas_df(query)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/common/sql/hooks/sql.py", line 262, in get_pandas_df
+    with closing(self.get_conn()) as conn:
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/mysql/hooks/mysql.py", line 196, in get_conn
+    return MySQLdb.connect(**conn_config)
+  File "/home/airflow/.local/lib/python3.10/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2005, "Unknown server host 'mysql' (-2)")
+[2026-03-25T11:14:32.004+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=e_commerce_dw_etl, task_id=extract.extract_and_load_to_staging, run_id=scheduled__2024-10-27T00:00:00+00:00, execution_date=20241027T000000, start_date=20260325T111423, end_date=20260325T111432
+[2026-03-25T11:14:32.017+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 4 for task extract.extract_and_load_to_staging ((2005, "Unknown server host 'mysql' (-2)"); 290)
+[2026-03-25T11:14:32.048+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-25T11:14:32.058+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-03-25T11:39:07.242+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-25T11:39:07.420+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T11:39:07.449+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T11:39:07.456+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-25T11:39:07.571+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extract.extract_and_load_to_staging> on 2024-10-27 00:00:00+00:00
+[2026-03-25T11:39:07.597+0000] {standard_task_runner.py:63} INFO - Started process 244 to run task
+[2026-03-25T11:39:07.603+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'extract.extract_and_load_to_staging', 'scheduled__2024-10-27T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmpbrub4pym']
+[2026-03-25T11:39:07.621+0000] {standard_task_runner.py:91} INFO - Job 4: Subtask extract.extract_and_load_to_staging
+[2026-03-25T11:39:07.884+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [running]> on host d9d1693fa74b
+[2026-03-25T11:39:08.144+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='extract.extract_and_load_to_staging' AIRFLOW_CTX_EXECUTION_DATE='2024-10-27T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-27T00:00:00+00:00'
+[2026-03-25T11:39:08.151+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-25T11:39:08.595+0000] {mysql_operator.py:13} ERROR - Can't connect to mysql database
+[2026-03-25T11:39:08.609+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-25T11:39:08.631+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/extract_data.py", line 30, in extract_and_load_to_staging
+    df = source_operator.get_data_to_pd(f"SELECT * FROM {table}")
+  File "/opt/airflow/plugins/mysql_operator.py", line 15, in get_data_to_pd
+    return self.mysqlhook.get_pandas_df(query)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/common/sql/hooks/sql.py", line 262, in get_pandas_df
+    with closing(self.get_conn()) as conn:
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/mysql/hooks/mysql.py", line 188, in get_conn
+    conn = self.connection or self.get_connection(getattr(self, self.conn_name_attr))
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/connection.py", line 519, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `mysql` isn't defined
+[2026-03-25T11:39:08.713+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=e_commerce_dw_etl, task_id=extract.extract_and_load_to_staging, run_id=scheduled__2024-10-27T00:00:00+00:00, execution_date=20241027T000000, start_date=20260325T113907, end_date=20260325T113908
+[2026-03-25T11:39:08.824+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 4 for task extract.extract_and_load_to_staging (The conn_id `mysql` isn't defined; 244)
+[2026-03-25T11:39:08.874+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-25T11:39:08.930+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-25T11:39:08.942+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-03-25T13:54:51.052+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-25T13:54:51.094+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T13:54:51.107+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-25T13:54:51.108+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-25T13:54:51.169+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extract.extract_and_load_to_staging> on 2024-10-27 00:00:00+00:00
+[2026-03-25T13:54:51.178+0000] {standard_task_runner.py:63} INFO - Started process 349 to run task
+[2026-03-25T13:54:51.184+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'extract.extract_and_load_to_staging', 'scheduled__2024-10-27T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmpk47_a6w6']
+[2026-03-25T13:54:51.188+0000] {standard_task_runner.py:91} INFO - Job 4: Subtask extract.extract_and_load_to_staging
+[2026-03-25T13:54:51.313+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [running]> on host 85f4963e6238
+[2026-03-25T13:54:51.502+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='extract.extract_and_load_to_staging' AIRFLOW_CTX_EXECUTION_DATE='2024-10-27T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-27T00:00:00+00:00'
+[2026-03-25T13:54:51.515+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-25T13:54:51.914+0000] {mysql_operator.py:13} ERROR - Can't connect to mysql database
+[2026-03-25T13:54:51.947+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-25T13:54:51.970+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/extract_data.py", line 30, in extract_and_load_to_staging
+    df = source_operator.get_data_to_pd(f"SELECT * FROM {table}")
+  File "/opt/airflow/plugins/mysql_operator.py", line 15, in get_data_to_pd
+    return self.mysqlhook.get_pandas_df(query)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/common/sql/hooks/sql.py", line 262, in get_pandas_df
+    with closing(self.get_conn()) as conn:
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/providers/mysql/hooks/mysql.py", line 188, in get_conn
+    conn = self.connection or self.get_connection(getattr(self, self.conn_name_attr))
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/connection.py", line 519, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `mysql` isn't defined
+[2026-03-25T13:54:51.991+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=e_commerce_dw_etl, task_id=extract.extract_and_load_to_staging, run_id=scheduled__2024-10-27T00:00:00+00:00, execution_date=20241027T000000, start_date=20260325T135451, end_date=20260325T135451
+[2026-03-25T13:54:52.131+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 4 for task extract.extract_and_load_to_staging (The conn_id `mysql` isn't defined; 349)
+[2026-03-25T13:54:52.185+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-25T13:54:52.236+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-25T13:54:52.249+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-03-26T03:38:34.834+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T03:38:34.969+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-26T03:38:35.004+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-26T03:38:35.009+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T03:38:35.057+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extract.extract_and_load_to_staging> on 2024-10-27 00:00:00+00:00
+[2026-03-26T03:38:35.074+0000] {standard_task_runner.py:63} INFO - Started process 512 to run task
+[2026-03-26T03:38:35.082+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'extract.extract_and_load_to_staging', 'scheduled__2024-10-27T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmpkeuakf_6']
+[2026-03-26T03:38:35.090+0000] {standard_task_runner.py:91} INFO - Job 4: Subtask extract.extract_and_load_to_staging
+[2026-03-26T03:38:35.296+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [running]> on host 031edd3e030e
+[2026-03-26T03:38:35.663+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='extract.extract_and_load_to_staging' AIRFLOW_CTX_EXECUTION_DATE='2024-10-27T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-27T00:00:00+00:00'
+[2026-03-26T03:38:35.686+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-26T03:38:36.733+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-26T03:38:36.761+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-26T03:38:36.911+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-26T03:38:36.952+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T03:38:37.011+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T03:38:37.311+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-26T03:38:37.314+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "pg_namespace_nspname_index"
+DETAIL:  Key (nspname)=(staging) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/extract_data.py", line 33, in extract_and_load_to_staging
+    staging_operator.save_data_to_postgres(
+  File "/opt/airflow/plugins/postgresql_operator.py", line 21, in save_data_to_postgres
+    con.execute(f"CREATE SCHEMA IF NOT EXISTS {schema};")
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1370, in execute
+    return self._exec_driver_sql(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1674, in _exec_driver_sql
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "pg_namespace_nspname_index"
+DETAIL:  Key (nspname)=(staging) already exists.
+
+[SQL: CREATE SCHEMA IF NOT EXISTS staging;]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)
+[2026-03-26T03:38:37.511+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=e_commerce_dw_etl, task_id=extract.extract_and_load_to_staging, run_id=scheduled__2024-10-27T00:00:00+00:00, execution_date=20241027T000000, start_date=20260326T033834, end_date=20260326T033837
+[2026-03-26T03:38:37.814+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 4 for task extract.extract_and_load_to_staging ((psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "pg_namespace_nspname_index"
+DETAIL:  Key (nspname)=(staging) already exists.
+
+[SQL: CREATE SCHEMA IF NOT EXISTS staging;]
+(Background on this error at: https://sqlalche.me/e/14/gkpj); 512)
+[2026-03-26T03:38:37.960+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-26T03:38:38.145+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-26T03:38:38.206+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-03-26T04:01:34.169+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T04:01:34.256+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-26T04:01:34.277+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [queued]>
+[2026-03-26T04:01:34.279+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T04:01:34.314+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extract.extract_and_load_to_staging> on 2024-10-27 00:00:00+00:00
+[2026-03-26T04:01:34.389+0000] {standard_task_runner.py:63} INFO - Started process 316 to run task
+[2026-03-26T04:01:34.399+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'extract.extract_and_load_to_staging', 'scheduled__2024-10-27T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmpmdzulcre']
+[2026-03-26T04:01:34.405+0000] {standard_task_runner.py:91} INFO - Job 4: Subtask extract.extract_and_load_to_staging
+[2026-03-26T04:01:34.619+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.extract.extract_and_load_to_staging scheduled__2024-10-27T00:00:00+00:00 [running]> on host 2d1a3218d35e
+[2026-03-26T04:01:34.825+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='extract.extract_and_load_to_staging' AIRFLOW_CTX_EXECUTION_DATE='2024-10-27T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-27T00:00:00+00:00'
+[2026-03-26T04:01:34.827+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-26T04:01:35.333+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-26T04:01:35.335+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-26T04:01:35.361+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-26T04:01:35.396+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:01:35.403+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:01:35.618+0000] {logging_mixin.py:188} INFO - Đã trích xuất và lưu bảng product_category_name_translation từ MySQL vào PostgreSQL public
+[2026-03-26T04:01:35.621+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-26T04:01:35.631+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:01:35.785+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:01:37.753+0000] {logging_mixin.py:188} INFO - Đã trích xuất và lưu bảng geolocation từ MySQL vào PostgreSQL public
+[2026-03-26T04:01:37.759+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-26T04:01:37.773+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:01:37.839+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:01:38.146+0000] {logging_mixin.py:188} INFO - Đã trích xuất và lưu bảng sellers từ MySQL vào PostgreSQL public
+[2026-03-26T04:01:38.168+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-26T04:01:38.204+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:01:38.982+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:01:43.596+0000] {logging_mixin.py:188} INFO - Đã trích xuất và lưu bảng customers từ MySQL vào PostgreSQL public
+[2026-03-26T04:01:43.601+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-26T04:01:43.611+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:01:43.796+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:01:46.283+0000] {logging_mixin.py:188} INFO - Đã trích xuất và lưu bảng products từ MySQL vào PostgreSQL public
+[2026-03-26T04:01:46.285+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-26T04:01:46.291+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:01:49.658+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:02:33.438+0000] {logging_mixin.py:188} INFO - Đã trích xuất và lưu bảng orders từ MySQL vào PostgreSQL public
+[2026-03-26T04:02:33.450+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-26T04:02:33.496+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:02:36.216+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:02:56.396+0000] {logging_mixin.py:188} INFO - Đã trích xuất và lưu bảng order_items từ MySQL vào PostgreSQL public
+[2026-03-26T04:02:56.409+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-26T04:02:56.437+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:02:57.728+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:03:08.802+0000] {logging_mixin.py:188} INFO - Đã trích xuất và lưu bảng payments từ MySQL vào PostgreSQL public
+[2026-03-26T04:03:08.815+0000] {base.py:84} INFO - Using connection ID 'mysql' for task execution.
+[2026-03-26T04:03:08.826+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:03:13.798+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:03:34.637+0000] {logging_mixin.py:188} INFO - Đã trích xuất và lưu bảng order_reviews từ MySQL vào PostgreSQL public
+[2026-03-26T04:03:34.724+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-03-26T04:03:34.736+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-26T04:03:34.772+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=e_commerce_dw_etl, task_id=extract.extract_and_load_to_staging, run_id=scheduled__2024-10-27T00:00:00+00:00, execution_date=20241027T000000, start_date=20260326T040134, end_date=20260326T040334
+[2026-03-26T04:03:35.101+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-03-26T04:03:35.196+0000] {taskinstance.py:3503} INFO - 6 downstream tasks scheduled from follow-on schedule check
+[2026-03-26T04:03:35.204+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

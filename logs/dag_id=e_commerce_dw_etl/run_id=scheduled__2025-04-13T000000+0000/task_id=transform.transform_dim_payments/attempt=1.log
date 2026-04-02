@@ -1,0 +1,72 @@
+[2026-03-26T03:46:04.457+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T03:46:04.703+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_payments scheduled__2025-04-13T00:00:00+00:00 [queued]>
+[2026-03-26T03:46:04.804+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_payments scheduled__2025-04-13T00:00:00+00:00 [queued]>
+[2026-03-26T03:46:04.811+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T03:46:04.994+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform.transform_dim_payments> on 2025-04-13 00:00:00+00:00
+[2026-03-26T03:46:05.025+0000] {standard_task_runner.py:63} INFO - Started process 3011 to run task
+[2026-03-26T03:46:05.073+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'transform.transform_dim_payments', 'scheduled__2025-04-13T00:00:00+00:00', '--job-id', '1062', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmphd0_v4a4']
+[2026-03-26T03:46:05.084+0000] {standard_task_runner.py:91} INFO - Job 1062: Subtask transform.transform_dim_payments
+[2026-03-26T03:46:05.377+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.transform.transform_dim_payments scheduled__2025-04-13T00:00:00+00:00 [running]> on host 031edd3e030e
+[2026-03-26T03:46:07.098+0000] {local_task_job_runner.py:124} ERROR - Received SIGTERM. Terminating subprocesses
+[2026-03-26T03:46:07.265+0000] {process_utils.py:132} INFO - Sending 15 to group 3011. PIDs of all processes in the group: [3011]
+[2026-03-26T03:46:07.273+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 3011
+[2026-03-26T03:46:07.417+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2026-03-26T03:46:07.528+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 2479, in _run_raw_task
+    self._execute_task_with_callbacks(context, test_mode, session=session)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 2638, in _execute_task_with_callbacks
+    RenderedTaskInstanceFields.delete_old_records(self.task_id, self.dag_id)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/utils/session.py", line 78, in wrapper
+    with create_session() as session:
+  File "/usr/local/lib/python3.10/contextlib.py", line 142, in __exit__
+    next(self.gen)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/utils/session.py", line 39, in create_session
+    session.commit()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 839, in commit
+    trans.commit()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2469, in commit
+    self._do_commit()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2659, in _do_commit
+    self._connection_commit_impl()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2630, in _connection_commit_impl
+    self.connection._commit_impl()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1096, in _commit_impl
+    self._handle_dbapi_exception(e, None, None, None, None)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2138, in _handle_dbapi_exception
+    util.raise_(exc_info[1], with_traceback=exc_info[2])
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1094, in _commit_impl
+    self.engine.dialect.do_commit(self.connection)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 686, in do_commit
+    dbapi_connection.commit()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 2613, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2026-03-26T03:46:07.562+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=e_commerce_dw_etl, task_id=transform.transform_dim_payments, run_id=scheduled__2025-04-13T00:00:00+00:00, execution_date=20250413T000000, start_date=20260326T034604, end_date=20260326T034607
+[2026-03-26T03:46:07.712+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=3011, status='terminated', exitcode=2, started='03:46:04') (3011) terminated with exit code 2
+[2026-03-26T03:46:07.714+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 143
+[2026-03-26T04:13:48.740+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T04:13:48.972+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_payments scheduled__2025-04-13T00:00:00+00:00 [queued]>
+[2026-03-26T04:13:49.070+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_payments scheduled__2025-04-13T00:00:00+00:00 [queued]>
+[2026-03-26T04:13:49.075+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T04:13:49.175+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform.transform_dim_payments> on 2025-04-13 00:00:00+00:00
+[2026-03-26T04:13:49.225+0000] {standard_task_runner.py:63} INFO - Started process 1701 to run task
+[2026-03-26T04:13:49.247+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'transform.transform_dim_payments', 'scheduled__2025-04-13T00:00:00+00:00', '--job-id', '397', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmpp0j65u3p']
+[2026-03-26T04:13:49.257+0000] {standard_task_runner.py:91} INFO - Job 397: Subtask transform.transform_dim_payments
+[2026-03-26T04:13:49.542+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.transform.transform_dim_payments scheduled__2025-04-13T00:00:00+00:00 [running]> on host 2d1a3218d35e
+[2026-03-26T04:13:50.909+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='transform.transform_dim_payments' AIRFLOW_CTX_EXECUTION_DATE='2025-04-13T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-04-13T00:00:00+00:00'
+[2026-03-26T04:13:50.912+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-26T04:13:50.961+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-26T04:13:50.964+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:13:50.990+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:13:51.017+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:13:51.211+0000] {logging_mixin.py:188} INFO - Đã transform và lưu dữ liệu vào dim_payments
+[2026-03-26T04:13:51.218+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-03-26T04:13:51.224+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-26T04:13:51.253+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=e_commerce_dw_etl, task_id=transform.transform_dim_payments, run_id=scheduled__2025-04-13T00:00:00+00:00, execution_date=20250413T000000, start_date=20260326T041348, end_date=20260326T041351
+[2026-03-26T04:13:51.501+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-03-26T04:13:51.534+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

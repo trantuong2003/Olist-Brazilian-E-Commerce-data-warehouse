@@ -1,0 +1,44 @@
+[2026-03-26T03:39:10.020+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T03:39:10.267+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_geolocation scheduled__2024-11-08T00:00:00+00:00 [queued]>
+[2026-03-26T03:39:10.342+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_geolocation scheduled__2024-11-08T00:00:00+00:00 [queued]>
+[2026-03-26T03:39:10.348+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T03:39:10.408+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform.transform_dim_geolocation> on 2024-11-08 00:00:00+00:00
+[2026-03-26T03:39:10.435+0000] {standard_task_runner.py:63} INFO - Started process 695 to run task
+[2026-03-26T03:39:10.455+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'transform.transform_dim_geolocation', 'scheduled__2024-11-08T00:00:00+00:00', '--job-id', '83', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmpypp8a4dz']
+[2026-03-26T03:39:10.469+0000] {standard_task_runner.py:91} INFO - Job 83: Subtask transform.transform_dim_geolocation
+[2026-03-26T03:39:10.864+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.transform.transform_dim_geolocation scheduled__2024-11-08T00:00:00+00:00 [running]> on host 031edd3e030e
+[2026-03-26T03:39:11.300+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='transform.transform_dim_geolocation' AIRFLOW_CTX_EXECUTION_DATE='2024-11-08T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-08T00:00:00+00:00'
+[2026-03-26T03:39:11.327+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-26T03:39:12.209+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-26T03:39:12.212+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T03:39:12.246+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T03:39:12.328+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T03:39:12.483+0000] {logging_mixin.py:188} INFO - Đã transform và lưu dữ liệu vào dim_geolocation
+[2026-03-26T03:39:12.488+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-03-26T03:39:12.492+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-26T03:39:12.521+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=e_commerce_dw_etl, task_id=transform.transform_dim_geolocation, run_id=scheduled__2024-11-08T00:00:00+00:00, execution_date=20241108T000000, start_date=20260326T033910, end_date=20260326T033912
+[2026-03-26T03:39:13.115+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-03-26T03:39:13.281+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-26T03:39:13.285+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-03-26T04:04:30.017+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-26T04:04:30.143+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_geolocation scheduled__2024-11-08T00:00:00+00:00 [queued]>
+[2026-03-26T04:04:30.173+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: e_commerce_dw_etl.transform.transform_dim_geolocation scheduled__2024-11-08T00:00:00+00:00 [queued]>
+[2026-03-26T04:04:30.181+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-03-26T04:04:30.304+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform.transform_dim_geolocation> on 2024-11-08 00:00:00+00:00
+[2026-03-26T04:04:30.342+0000] {standard_task_runner.py:63} INFO - Started process 610 to run task
+[2026-03-26T04:04:30.385+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'e_commerce_dw_etl', 'transform.transform_dim_geolocation', 'scheduled__2024-11-08T00:00:00+00:00', '--job-id', '83', '--raw', '--subdir', 'DAGS_FOLDER/e_commerce_dw_dag.py', '--cfg-path', '/tmp/tmpz8hrw1l2']
+[2026-03-26T04:04:30.397+0000] {standard_task_runner.py:91} INFO - Job 83: Subtask transform.transform_dim_geolocation
+[2026-03-26T04:04:30.691+0000] {task_command.py:426} INFO - Running <TaskInstance: e_commerce_dw_etl.transform.transform_dim_geolocation scheduled__2024-11-08T00:00:00+00:00 [running]> on host 2d1a3218d35e
+[2026-03-26T04:04:31.273+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='e_commerce_dw_etl' AIRFLOW_CTX_TASK_ID='transform.transform_dim_geolocation' AIRFLOW_CTX_EXECUTION_DATE='2024-11-08T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-08T00:00:00+00:00'
+[2026-03-26T04:04:31.291+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-26T04:04:32.456+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2026-03-26T04:04:32.462+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:04:32.552+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.10/site-packages/***/providers/common/sql/hooks/sql.py:263 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2026-03-26T04:04:33.016+0000] {base.py:84} INFO - Using connection ID 'postgres' for task execution.
+[2026-03-26T04:04:36.106+0000] {logging_mixin.py:188} INFO - Đã transform và lưu dữ liệu vào dim_geolocation
+[2026-03-26T04:04:36.117+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-03-26T04:04:36.119+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-26T04:04:36.141+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=e_commerce_dw_etl, task_id=transform.transform_dim_geolocation, run_id=scheduled__2024-11-08T00:00:00+00:00, execution_date=20241108T000000, start_date=20260326T040430, end_date=20260326T040436
+[2026-03-26T04:04:36.244+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-03-26T04:04:36.307+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-03-26T04:04:36.320+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
