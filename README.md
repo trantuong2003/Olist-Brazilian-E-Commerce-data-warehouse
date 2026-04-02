@@ -27,6 +27,7 @@ Python và các tập lệnh tùy chỉnh được sử dụng để trích xu�
 <img width="1415" height="790" alt="Screenshot 2026-04-02 155022" src="https://github.com/user-attachments/assets/16f7b731-0772-4c35-a29d-fca6a79b3940" />
 
 6. insight
+   
 Insight: Doanh thu cao chủ yếu đến từ số lượng đơn hàng lớn trong khi giá trị đơn hàng trung bình không cao.
 Nguyên nhân: Khách hàng có xu hướng mua các sản phẩm giá thấp hoặc mua lẻ từng đơn.
 Giải pháp: Áp dụng bundle sản phẩm, free shipping theo ngưỡng giá trị đơn để khuyến khích khách tăng giá trị giỏ hàng.
